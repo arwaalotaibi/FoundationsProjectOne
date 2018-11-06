@@ -10,73 +10,78 @@ original_flavors = ["vanilla", "chocolate", "strawberry", "caramel", "raspberry"
 original_price = 2
 signature_price = 2.750
 
-############################# Start Here! ##############################
-cupcake_shop_name = #complete me!
-signature_flavors = #complete me!
+cupcake_shop_name = "Get Baked"
+signature_flavors = ["tuna", "salmon", "red herring" ]
 order_list = []
-
-
+total = int()
 def print_menu():
     """
-    Print the items in the menu dictionary.
-    """
+        Print the items in the menu dictionary.
+        """
     # your code goes here!
-
+    print("Our menu:")
+    for key in menu:
+     print(key,"(KD %s )" % (menu[key]))
 
 def print_originals():
     """
-    Print the original flavor cupcakes.
-    """
+        Print the original flavor cupcakes.
+        """
     print("Our original flavor cupcakes (KD %s each):" % original_price)
     # your code goes here!
-
-
+    for n in original_flavors:
+        print(n)
 def print_signatures():
-    """
-    Print the signature flavor cupcakes.
-    """
-    print("Our signature flavor cupcake (KD %s each):" % signature_price)
+   print("Our signature flavor cupcakes (KD %s each):" % signature_price)
+   for x in signature_flavors:
+    print(x) 
     # your code goes here!
-
-
 def is_valid_order(order):
-    """
-    Check if an order exists in the shop.
-    """
-    # your code goes here!
-
+  return order in menu or order in original_flavors or order in signature_flavors 
 
 def get_order():
-    """
-    Repeatedly ask customer for order until they end their order by typing "Exit".
-    """
-    order_list = []
-    # your code goes here!
+ order_list = []
+ 
+ x = input("What's your order? (Enter the exact spelling of the item you want. Type exit to end order \n")
+ while x != "exit":   
+  if is_valid_order(x) == True :
+    order_list.append(x)
+  x =input()
+ return order_list
 
-    return order_list
-
-
-def accept_credit_card(total):
-    """
-    Return whether an order is eligible for credit card payment.
-    """
-    # your code goes here!
 
 
 def get_total_price(order_list):
-    """
-    Calculate and return total price of the order.
-    """
-    total = 0
-    # your code goes here!
+   
+   total = 0
 
-    return total
+   for n in order_list:
+      if n in menu :
+        total += menu[n]
+      elif n in original_flavors:
+        total += original_price
+      elif n in signature_flavors:
+        total += signature_price
+  
+   return total
+
+def accept_credit_card(total):
+  if total >= 5 :
+    print("The order is eligible for credit card payment")
+  elif total < 5:
+    print("The order is not eligible for credit card payment")
+
 
 
 def print_order(order_list):
-    """
-    Print the order of the customer.
-    """
+  
     print()
     print("Your order is: ")
-    # your code goes here!
+    for n in order_list:
+        print(n)
+    print("That'll be KD",get_total_price(order_list))
+    accept_credit_card(get_total_price(order_list))
+    print("Thank you for shoping at",cupcake_shop_name)
+  
+
+
